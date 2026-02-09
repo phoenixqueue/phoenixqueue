@@ -116,3 +116,5 @@ This is how Ralph maintains continuity across iterations.
 - Implemented `POST /phoenixqueue/jobs/:id/resume` (requeue while preserving `progress`) with request spec coverage; marked Phase 6 criterion 32 complete.
 - Implemented `POST /phoenixqueue/jobs/:id/cancel` (mark canceled + prevent worker claim) with request spec coverage; marked Phase 6 criterion 33 complete.
 - Added `Phoenixqueue.config.redact_keys` and payload redaction in the Web UI payload viewer (with request spec coverage); marked Phase 7 criterion 34 complete.
+- Expanded `README.md` with system semantics and operational guidance (worker loop, sweeper, UI mount, redaction); marked Phase 7 criterion 35 complete.
+- Re-ran `./bin/test` successfully and marked criterion 36 complete.
