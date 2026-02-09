@@ -3,8 +3,8 @@
 # DO NOT EDIT - regenerated on task file change
 
 source_file: RALPH_TASK.md
-source_mtime: 1770661715
-generated_at: 2026-02-09T18:30:00Z
+source_mtime: 1770662058
+generated_at: 2026-02-09T18:34:41Z
 
 tasks:
   - id: "line_235"
@@ -156,35 +156,35 @@ tasks:
     raw_marker: 21.
   - id: "line_266"
     line_number: 266
-    status: pending
+    status: completed
     parallel_group: 999999
     description: Module `Phoenixqueue::Checkpointed` provides `step(:name) { ... }`.
     indent_level: 0
     raw_marker: 22.
   - id: "line_267"
     line_number: 267
-    status: pending
+    status: completed
     parallel_group: 999999
     description: Worker sets `Phoenixqueue::Current.job_id` (thread-local) during execution and clears it in `ensure`.
     indent_level: 0
     raw_marker: 23.
   - id: "line_268"
     line_number: 268
-    status: pending
+    status: completed
     parallel_group: 999999
     description: Completed steps are persisted in `jobs.progress` jsonb.
     indent_level: 0
     raw_marker: 24.
   - id: "line_269"
     line_number: 269
-    status: pending
+    status: completed
     parallel_group: 999999
     description: On retry/resume, completed steps are skipped (verified by specs).
     indent_level: 0
     raw_marker: 25.
   - id: "line_270"
     line_number: 270
-    status: pending
+    status: completed
     parallel_group: 999999
     description: If a job fails mid-step, that step is not marked complete and re-runs on retry (verified by specs).
     indent_level: 0
