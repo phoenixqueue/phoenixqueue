@@ -1,0 +1,266 @@
+# Ralph Task Cache
+# Auto-generated from RALPH_TASK.md
+# DO NOT EDIT - regenerated on task file change
+
+source_file: RALPH_TASK.md
+source_mtime:   File: "/Users/riccardotacconi/dev/phoenixqueue/RALPH_TASK.md"
+    ID: 10000130000001a Namelen: ?       Type: apfs
+Block size: 4096       Fundamental block size: 4096
+Blocks: Total: 120699413  Free: 29641790   Available: 29641790
+Inodes: Total: 1187238155 Free: 1185671600
+0
+generated_at: 2026-02-09T17:57:44Z
+
+tasks:
+  - id: "line_235"
+    line_number: 235
+    status: completed
+    parallel_group: 999999
+    description: Repo root is a Ruby gem named `phoenixqueue` with `phoenixqueue.gemspec`, `Gemfile`, and `lib/phoenixqueue.rb`.
+    indent_level: 0
+    raw_marker: 1.
+  - id: "line_236"
+    line_number: 236
+    status: completed
+    parallel_group: 999999
+    description: RSpec is configured and `bundle exec rspec` runs (even if only a placeholder spec).
+    indent_level: 0
+    raw_marker: 2.
+  - id: "line_237"
+    line_number: 237
+    status: completed
+    parallel_group: 999999
+    description: `docker-compose.yml` exists and can start Postgres (`docker compose up -d`).
+    indent_level: 0
+    raw_marker: 3.
+  - id: "line_238"
+    line_number: 238
+    status: pending
+    parallel_group: 999999
+    description: `./bin/setup` exists and completes successfully with Docker installed.
+    indent_level: 0
+    raw_marker: 4.
+  - id: "line_239"
+    line_number: 239
+    status: pending
+    parallel_group: 999999
+    description: `./bin/test` exists and runs the full suite (db up + migrations + tests) and exits 0.
+    indent_level: 0
+    raw_marker: 5.
+  - id: "line_242"
+    line_number: 242
+    status: pending
+    parallel_group: 999999
+    description: Rails engine or railtie loads `Phoenixqueue::Job` and `Phoenixqueue::JobEvent`.
+    indent_level: 0
+    raw_marker: 6.
+  - id: "line_243"
+    line_number: 243
+    status: pending
+    parallel_group: 999999
+    description: Migrations create `phoenixqueue_jobs` and `phoenixqueue_job_events` with required columns and indexes.
+    indent_level: 0
+    raw_marker: 7.
+  - id: "line_244"
+    line_number: 244
+    status: pending
+    parallel_group: 999999
+    description: `Phoenixqueue::Job` validates required fields (queue, job_class, payload, status, run_at).
+    indent_level: 0
+    raw_marker: 8.
+  - id: "line_245"
+    line_number: 245
+    status: pending
+    parallel_group: 999999
+    description: Creating a job record automatically writes `job_event(enqueued)`.
+    indent_level: 0
+    raw_marker: 9.
+  - id: "line_248"
+    line_number: 248
+    status: pending
+    parallel_group: 999999
+    description: Worker implements `claim_next_job(queues:, worker_id:)` using `FOR UPDATE SKIP LOCKED`.
+    indent_level: 0
+    raw_marker: 10.
+  - id: "line_249"
+    line_number: 249
+    status: pending
+    parallel_group: 999999
+    description: Worker updates job to `running` with `locked_by`, `locked_at`, `lease_expires_at`.
+    indent_level: 0
+    raw_marker: 11.
+  - id: "line_250"
+    line_number: 250
+    status: pending
+    parallel_group: 999999
+    description: Worker executes a claimed job via `ActiveJob::Base.execute(payload)`.
+    indent_level: 0
+    raw_marker: 12.
+  - id: "line_251"
+    line_number: 251
+    status: pending
+    parallel_group: 999999
+    description: On success: job becomes `succeeded` with `finished_at` and `job_event(succeeded)`.
+    indent_level: 0
+    raw_marker: 13.
+  - id: "line_252"
+    line_number: 252
+    status: pending
+    parallel_group: 999999
+    description: On exception: record error; retry (re-queue with backoff) or set `failed` when `max_attempts` exceeded.
+    indent_level: 0
+    raw_marker: 14.
+  - id: "line_253"
+    line_number: 253
+    status: pending
+    parallel_group: 999999
+    description: Heartbeat updates `lease_expires_at` while job is running (configurable interval + lease duration).
+    indent_level: 0
+    raw_marker: 15.
+  - id: "line_256"
+    line_number: 256
+    status: pending
+    parallel_group: 999999
+    description: Command `phoenixqueue sweep` exists and marks stale running jobs as `interrupted`.
+    indent_level: 0
+    raw_marker: 16.
+  - id: "line_257"
+    line_number: 257
+    status: pending
+    parallel_group: 999999
+    description: Sweeper writes `job_event(interrupted)` when marking a job interrupted.
+    indent_level: 0
+    raw_marker: 17.
+  - id: "line_258"
+    line_number: 258
+    status: pending
+    parallel_group: 999999
+    description: Optional: `phoenixqueue sweep --requeue` requeues interrupted jobs to `queued` (and writes `job_event(retried)` or `requeued`).
+    indent_level: 0
+    raw_marker: 18.
+  - id: "line_261"
+    line_number: 261
+    status: pending
+    parallel_group: 999999
+    description: `ActiveJob::QueueAdapters::PhoenixqueueAdapter` exists with `enqueue` and `enqueue_at`.
+    indent_level: 0
+    raw_marker: 19.
+  - id: "line_262"
+    line_number: 262
+    status: pending
+    parallel_group: 999999
+    description: Dummy Rails app in `spec/dummy` can set `config.active_job.queue_adapter = :phoenixqueue` and enqueue a job.
+    indent_level: 0
+    raw_marker: 20.
+  - id: "line_263"
+    line_number: 263
+    status: pending
+    parallel_group: 999999
+    description: RSpec: enqueuing via ActiveJob creates a `phoenixqueue_jobs` row with correct queue, job_class, payload, run_at.
+    indent_level: 0
+    raw_marker: 21.
+  - id: "line_266"
+    line_number: 266
+    status: pending
+    parallel_group: 999999
+    description: Module `Phoenixqueue::Checkpointed` provides `step(:name) { ... }`.
+    indent_level: 0
+    raw_marker: 22.
+  - id: "line_267"
+    line_number: 267
+    status: pending
+    parallel_group: 999999
+    description: Worker sets `Phoenixqueue::Current.job_id` (thread-local) during execution and clears it in `ensure`.
+    indent_level: 0
+    raw_marker: 23.
+  - id: "line_268"
+    line_number: 268
+    status: pending
+    parallel_group: 999999
+    description: Completed steps are persisted in `jobs.progress` jsonb.
+    indent_level: 0
+    raw_marker: 24.
+  - id: "line_269"
+    line_number: 269
+    status: pending
+    parallel_group: 999999
+    description: On retry/resume, completed steps are skipped (verified by specs).
+    indent_level: 0
+    raw_marker: 25.
+  - id: "line_270"
+    line_number: 270
+    status: pending
+    parallel_group: 999999
+    description: If a job fails mid-step, that step is not marked complete and re-runs on retry (verified by specs).
+    indent_level: 0
+    raw_marker: 26.
+  - id: "line_273"
+    line_number: 273
+    status: pending
+    parallel_group: 999999
+    description: Rails engine `Phoenixqueue::Web` is mountable (document route mount in README).
+    indent_level: 0
+    raw_marker: 27.
+  - id: "line_274"
+    line_number: 274
+    status: pending
+    parallel_group: 999999
+    description: `GET /phoenixqueue` dashboard returns 200 and shows counts by status + queue latency.
+    indent_level: 0
+    raw_marker: 28.
+  - id: "line_275"
+    line_number: 275
+    status: pending
+    parallel_group: 999999
+    description: `GET /phoenixqueue/jobs` returns 200 and supports filtering by status, queue, job_class.
+    indent_level: 0
+    raw_marker: 29.
+  - id: "line_276"
+    line_number: 276
+    status: pending
+    parallel_group: 999999
+    description: `GET /phoenixqueue/jobs/:id` returns 200 and shows payload, error, attempts, timing, progress steps.
+    indent_level: 0
+    raw_marker: 30.
+  - id: "line_277"
+    line_number: 277
+    status: pending
+    parallel_group: 999999
+    description: `POST /phoenixqueue/jobs/:id/retry` works (job back to queued, attempt incremented as appropriate).
+    indent_level: 0
+    raw_marker: 31.
+  - id: "line_278"
+    line_number: 278
+    status: pending
+    parallel_group: 999999
+    description: `POST /phoenixqueue/jobs/:id/resume` works and preserves checkpoint progress (skips completed steps).
+    indent_level: 0
+    raw_marker: 32.
+  - id: "line_279"
+    line_number: 279
+    status: pending
+    parallel_group: 999999
+    description: `POST /phoenixqueue/jobs/:id/cancel` marks job `canceled` and prevents further execution.
+    indent_level: 0
+    raw_marker: 33.
+  - id: "line_282"
+    line_number: 282
+    status: pending
+    parallel_group: 999999
+    description: Payload redaction via `Phoenixqueue.config.redact_keys`; UI displays redacted payload fields.
+    indent_level: 0
+    raw_marker: 34.
+  - id: "line_283"
+    line_number: 283
+    status: pending
+    parallel_group: 999999
+    description: README explains at-least-once, interruption handling, checkpoint limitations, and how to run worker + UI.
+    indent_level: 0
+    raw_marker: 35.
+  - id: "line_284"
+    line_number: 284
+    status: pending
+    parallel_group: 999999
+    description: `./bin/test` is green and sufficient to claim task complete.
+    indent_level: 0
+    raw_marker: 36.
