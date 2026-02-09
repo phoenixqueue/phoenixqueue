@@ -279,7 +279,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 33. [x] `POST /phoenixqueue/jobs/:id/cancel` marks job `canceled` and prevents further execution.
 
 ### Phase 7 — UX/security polish
-34. [ ] Payload redaction via `Phoenixqueue.config.redact_keys`; UI displays redacted payload fields.
+34. [x] Payload redaction via `Phoenixqueue.config.redact_keys`; UI displays redacted payload fields.
 35. [ ] README explains at-least-once, interruption handling, checkpoint limitations, and how to run worker + UI.
 36. [ ] `./bin/test` is green and sufficient to claim task complete.
 

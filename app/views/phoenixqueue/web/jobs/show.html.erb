@@ -59,7 +59,8 @@
   <h2>Payload</h2>
   <details>
     <summary class="muted">Show payload (JSON)</summary>
-    <pre style="white-space:pre-wrap;"><%= JSON.pretty_generate(@job.payload || {}) %></pre>
+    <% redacted_payload = Phoenixqueue::Redaction.redact(@job.payload || {}, keys: Phoenixqueue.config.redact_keys) %>
+    <pre style="white-space:pre-wrap;"><%= JSON.pretty_generate(redacted_payload) %></pre>
   </details>
 </div>
 

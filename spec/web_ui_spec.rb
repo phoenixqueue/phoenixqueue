@@ -148,6 +148,27 @@ RSpec.describe "Phoenixqueue Web UI" do
     expect(body).to include("execute")
   end
 
+  it "redacts configured payload keys in the UI" do
+    original = Phoenixqueue.config.redact_keys.dup
+    Phoenixqueue.config.redact_keys = ["token"]
+
+    job = Phoenixqueue::Job.create!(
+      queue: "default",
+      job_class: "SecretJob",
+      payload: { "token" => "supersecret", "nested" => { "token" => "nestedsecret" } },
+      status: "queued",
+      run_at: Time.now.utc
+    )
+
+    get "/phoenixqueue/jobs/#{job.id}"
+    expect(last_response.status).to eq(200)
+    expect(last_response.body).to include(Phoenixqueue::Redaction::REDACTED)
+    expect(last_response.body).not_to include("supersecret")
+    expect(last_response.body).not_to include("nestedsecret")
+  ensure
+    Phoenixqueue.config.redact_keys = original
+  end
+
   it "retries a job via POST /phoenixqueue/jobs/:id/retry" do
     fixed_now = Time.utc(2026, 2, 9, 12, 0, 0)
     allow(Time).to receive(:now).and_return(fixed_now)
