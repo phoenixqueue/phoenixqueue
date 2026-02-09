@@ -110,3 +110,4 @@ This is how Ralph maintains continuity across iterations.
 - Added `README.md` documenting how to mount the engine in a host Rails app.
 - Marked Phase 6 criterion 27 complete in `RALPH_TASK.md`.
 - Expanded the dashboard request spec to verify counts-by-status and queue latency rendering; marked Phase 6 criterion 28 complete.
+- Added request spec coverage for `/phoenixqueue/jobs` filtering by status, queue, and job_class; marked Phase 6 criterion 29 complete.

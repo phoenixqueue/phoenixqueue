@@ -272,7 +272,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 ### Phase 6 — Web UI (Rails engine)
 27. [x] Rails engine `Phoenixqueue::Web` is mountable (document route mount in README).
 28. [x] `GET /phoenixqueue` dashboard returns 200 and shows counts by status + queue latency.
-29. [ ] `GET /phoenixqueue/jobs` returns 200 and supports filtering by status, queue, job_class.
+29. [x] `GET /phoenixqueue/jobs` returns 200 and supports filtering by status, queue, job_class.
 30. [ ] `GET /phoenixqueue/jobs/:id` returns 200 and shows payload, error, attempts, timing, progress steps.
 31. [ ] `POST /phoenixqueue/jobs/:id/retry` works (job back to queued, attempt incremented as appropriate).
 32. [ ] `POST /phoenixqueue/jobs/:id/resume` works and preserves checkpoint progress (skips completed steps).
