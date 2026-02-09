@@ -3,6 +3,7 @@ require "logger"
 require_relative "phoenixqueue/job"
 require_relative "phoenixqueue/job_event"
 require_relative "phoenixqueue/current"
+require_relative "phoenixqueue/checkpointed"
 require_relative "phoenixqueue/worker"
 require_relative "phoenixqueue/sweeper"
 

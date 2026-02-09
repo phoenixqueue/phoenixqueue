@@ -263,11 +263,11 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 21. [x] RSpec: enqueuing via ActiveJob creates a `phoenixqueue_jobs` row with correct queue, job_class, payload, run_at.
 
 ### Phase 5 — checkpoint/resume DSL
-22. [ ] Module `Phoenixqueue::Checkpointed` provides `step(:name) { ... }`.
+22. [x] Module `Phoenixqueue::Checkpointed` provides `step(:name) { ... }`.
 23. [x] Worker sets `Phoenixqueue::Current.job_id` (thread-local) during execution and clears it in `ensure`.
-24. [ ] Completed steps are persisted in `jobs.progress` jsonb.
-25. [ ] On retry/resume, completed steps are skipped (verified by specs).
-26. [ ] If a job fails mid-step, that step is not marked complete and re-runs on retry (verified by specs).
+24. [x] Completed steps are persisted in `jobs.progress` jsonb.
+25. [x] On retry/resume, completed steps are skipped (verified by specs).
+26. [x] If a job fails mid-step, that step is not marked complete and re-runs on retry (verified by specs).
 
 ### Phase 6 — Web UI (Rails engine)
 27. [ ] Rails engine `Phoenixqueue::Web` is mountable (document route mount in README).

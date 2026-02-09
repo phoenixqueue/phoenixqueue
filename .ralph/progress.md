@@ -89,3 +89,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 4 criterion 20 complete in `RALPH_TASK.md`.
 - Added `Phoenixqueue::Current` (thread-local) and set/cleared it around worker job execution, with specs.
 - Marked Phase 5 criterion 23 complete in `RALPH_TASK.md`.
+- Added `Phoenixqueue::Checkpointed` with `step` checkpoints persisted in `jobs.progress`, plus specs proving completed steps are skipped on retry and failed steps rerun.
+- Marked Phase 5 criteria 22 and 24–26 complete in `RALPH_TASK.md`.
