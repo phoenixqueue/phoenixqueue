@@ -112,3 +112,4 @@ This is how Ralph maintains continuity across iterations.
 - Expanded the dashboard request spec to verify counts-by-status and queue latency rendering; marked Phase 6 criterion 28 complete.
 - Added request spec coverage for `/phoenixqueue/jobs` filtering by status, queue, and job_class; marked Phase 6 criterion 29 complete.
 - Added request spec coverage for `/phoenixqueue/jobs/:id` showing payload/error/attempts/timing/progress; marked Phase 6 criterion 30 complete.
+- Implemented `POST /phoenixqueue/jobs/:id/retry` (requeue + attempt increment + `retried` event) with request spec coverage; marked Phase 6 criterion 31 complete.

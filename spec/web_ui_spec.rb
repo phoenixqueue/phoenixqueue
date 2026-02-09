@@ -147,5 +147,41 @@ RSpec.describe "Phoenixqueue Web UI" do
     expect(body).to include("plan")
     expect(body).to include("execute")
   end
+
+  it "retries a job via POST /phoenixqueue/jobs/:id/retry" do
+    fixed_now = Time.utc(2026, 2, 9, 12, 0, 0)
+    allow(Time).to receive(:now).and_return(fixed_now)
+
+    job = Phoenixqueue::Job.create!(
+      queue: "default",
+      job_class: "RetryMeJob",
+      payload: { "args" => [1] },
+      status: "failed",
+      run_at: fixed_now - 60,
+      finished_at: fixed_now - 30,
+      attempt: 1,
+      max_attempts: 5,
+      last_error_class: "RuntimeError",
+      last_error_message: "boom",
+      progress: { "completed" => ["a"], "current" => "b" }
+    )
+
+    post "/phoenixqueue/jobs/#{job.id}/retry"
+    expect(last_response.status).to eq(302)
+    follow_redirect!
+    expect(last_response.status).to eq(200)
+
+    job.reload
+    expect(job.status).to eq("queued")
+    expect(job.run_at).to eq(fixed_now)
+    expect(job.attempt).to eq(2)
+    expect(job.last_error_class).to be_nil
+    expect(job.last_error_message).to be_nil
+    expect(job.progress).to eq({})
+
+    retried = job.events.order(:id).last
+    expect(retried.event_type).to eq("retried")
+    expect(retried.data).to include("attempt" => 2, "reason" => "retry")
+  end
 end
 
