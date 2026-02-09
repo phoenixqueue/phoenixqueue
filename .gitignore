@@ -4,3 +4,8 @@
 # Ralph logs (ephemeral; keep working tree clean)
 .ralph/activity.log
 .ralph/errors.log
+
+# Ruby / Bundler
+Gemfile.lock
+.bundle/
+vendor/bundle/

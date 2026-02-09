@@ -22,3 +22,5 @@ This is how Ralph maintains continuity across iterations.
 ### 2026-02-09
 - Scaffolded the repo as a Ruby gem (`phoenixqueue.gemspec`, `Gemfile`, `lib/phoenixqueue.rb` + version).
 - Marked Phase 0 criterion 1 complete in `RALPH_TASK.md`.
+- Added RSpec + minimal spec harness; verified `bundle exec rspec` runs.
+- Marked Phase 0 criterion 2 complete in `RALPH_TASK.md`.

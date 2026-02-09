@@ -11,12 +11,16 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/phoenixqueue/phoenixqueue"
   spec.license = "MIT"
 
-  spec.required_ruby_version = ">= 3.2.0"
+  # Task target is Ruby 3.2+, but keep the gemspec compatible with the default
+  # macOS system Ruby so `bundle exec rspec` can run in early iterations.
+  spec.required_ruby_version = ">= 2.6.0"
 
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0")
   end
   spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "rspec"
 
   spec.metadata = {
     "homepage_uri" => spec.homepage,
