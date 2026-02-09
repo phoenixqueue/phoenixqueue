@@ -1,2 +1,6 @@
 # Ralph config (may contain API key)
 .cursor/ralph-config.json
+
+# Ralph logs (ephemeral; keep working tree clean)
+.ralph/activity.log
+.ralph/errors.log
