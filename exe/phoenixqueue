@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require "optparse"
+require "active_record"
+require "phoenixqueue"
+
+def database_url
+  ENV.fetch("PHOENIXQUEUE_DATABASE_URL", "postgres://phoenixqueue:phoenixqueue@localhost:54324/phoenixqueue_development")
+end
+
+subcommand = ARGV.shift
+
+case subcommand
+when "sweep"
+  options = { requeue: false }
+  OptionParser.new do |opts|
+    opts.on("--requeue", "Requeue interrupted jobs back to queued (not yet implemented)") { options[:requeue] = true }
+  end.parse!(ARGV)
+
+  ActiveRecord::Base.establish_connection(database_url)
+  Phoenixqueue::Sweeper.sweep!(requeue: options[:requeue])
+else
+  warn "Usage: phoenixqueue sweep"
+  exit 1
+end
+

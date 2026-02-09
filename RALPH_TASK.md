@@ -253,7 +253,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 15. [x] Heartbeat updates `lease_expires_at` while job is running (configurable interval + lease duration).
 
 ### Phase 3 — sweeper / interruption
-16. [ ] Command `phoenixqueue sweep` exists and marks stale running jobs as `interrupted`.
+16. [x] Command `phoenixqueue sweep` exists and marks stale running jobs as `interrupted`.
 17. [ ] Sweeper writes `job_event(interrupted)` when marking a job interrupted.
 18. [ ] Optional: `phoenixqueue sweep --requeue` requeues interrupted jobs to `queued` (and writes `job_event(retried)` or `requeued`).
 

@@ -58,3 +58,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 2 criterion 14 complete in `RALPH_TASK.md`.
 - Added a background heartbeat to extend `lease_expires_at` while a job is executing, with specs.
 - Marked Phase 2 criterion 15 complete in `RALPH_TASK.md`.
+- Added `phoenixqueue sweep` + a minimal sweeper to mark stale running jobs as `interrupted`, with specs.
+- Marked Phase 3 criterion 16 complete in `RALPH_TASK.md`.
