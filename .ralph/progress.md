@@ -35,4 +35,6 @@ This is how Ralph maintains continuity across iterations.
 
 ### 2026-02-09
 - Added `bin/setup` to install gems and bring up Postgres via Docker Compose (waits for readiness + creates a test DB).
+- Added `bin/test` to run setup + the full RSpec suite (and run dummy Rails `db:prepare` when present).
 - Marked Phase 0 criterion 4 complete in `RALPH_TASK.md`.
+- Marked Phase 0 criterion 5 complete in `RALPH_TASK.md`.

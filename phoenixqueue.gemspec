@@ -28,4 +28,3 @@ Gem::Specification.new do |spec|
     "rubygems_mfa_required" => "true"
   }
 end
-
