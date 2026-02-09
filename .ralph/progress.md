@@ -24,3 +24,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 0 criterion 1 complete in `RALPH_TASK.md`.
 - Added RSpec + minimal spec harness; verified `bundle exec rspec` runs.
 - Marked Phase 0 criterion 2 complete in `RALPH_TASK.md`.
+- Added `docker-compose.yml` for local Postgres and verified `docker compose up -d` starts it.
+- Marked Phase 0 criterion 3 complete in `RALPH_TASK.md`.

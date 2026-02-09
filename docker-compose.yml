@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: phoenixqueue
+      POSTGRES_PASSWORD: phoenixqueue
+      POSTGRES_DB: phoenixqueue_development
+    ports:
+      # Use a non-default host port to avoid clashing with a local Postgres.
+      - "54324:5432"
+    volumes:
+      - phoenixqueue_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U phoenixqueue -d phoenixqueue_development"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  phoenixqueue_pgdata:
+
