@@ -3,13 +3,8 @@
 # DO NOT EDIT - regenerated on task file change
 
 source_file: RALPH_TASK.md
-source_mtime:   File: "/Users/riccardotacconi/dev/phoenixqueue/RALPH_TASK.md"
-    ID: 10000130000001a Namelen: ?       Type: apfs
-Block size: 4096       Fundamental block size: 4096
-Blocks: Total: 120699413  Free: 29295498   Available: 29295498
-Inodes: Total: 1173394107 Free: 1171819920
-0
-generated_at: 2026-02-09T18:27:45Z
+source_mtime: 1770661715
+generated_at: 2026-02-09T18:30:00Z
 
 tasks:
   - id: "line_235"
@@ -147,7 +142,7 @@ tasks:
     raw_marker: 19.
   - id: "line_262"
     line_number: 262
-    status: pending
+    status: completed
     parallel_group: 999999
     description: Dummy Rails app in `spec/dummy` can set `config.active_job.queue_adapter = :phoenixqueue` and enqueue a job.
     indent_level: 0
