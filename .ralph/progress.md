@@ -18,3 +18,7 @@ This is how Ralph maintains continuity across iterations.
 
 ### 2026-02-09 17:50:48
 **Session 1 started** (model: gpt-5.2-high)
+
+### 2026-02-09
+- Scaffolded the repo as a Ruby gem (`phoenixqueue.gemspec`, `Gemfile`, `lib/phoenixqueue.rb` + version).
+- Marked Phase 0 criterion 1 complete in `RALPH_TASK.md`.
