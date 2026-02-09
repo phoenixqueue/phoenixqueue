@@ -255,7 +255,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 ### Phase 3 — sweeper / interruption
 16. [x] Command `phoenixqueue sweep` exists and marks stale running jobs as `interrupted`.
 17. [x] Sweeper writes `job_event(interrupted)` when marking a job interrupted.
-18. [ ] Optional: `phoenixqueue sweep --requeue` requeues interrupted jobs to `queued` (and writes `job_event(retried)` or `requeued`).
+18. [x] Optional: `phoenixqueue sweep --requeue` requeues interrupted jobs to `queued` (and writes `job_event(retried)` or `requeued`).
 
 ### Phase 4 — ActiveJob adapter
 19. [ ] `ActiveJob::QueueAdapters::PhoenixqueueAdapter` exists with `enqueue` and `enqueue_at`.

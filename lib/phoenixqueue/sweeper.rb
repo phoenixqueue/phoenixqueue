@@ -13,6 +13,11 @@ module Phoenixqueue
             lease_expires_at: nil
           )
           Phoenixqueue::JobEvent.create!(job_id: job.id, event_type: "interrupted", data: {})
+
+          if requeue
+            job.update!(status: "queued", run_at: now)
+            Phoenixqueue::JobEvent.create!(job_id: job.id, event_type: "retried", data: { "reason" => "sweep_requeue" })
+          end
         end
       end
     end

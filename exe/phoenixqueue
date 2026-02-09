@@ -14,7 +14,7 @@ case subcommand
 when "sweep"
   options = { requeue: false }
   OptionParser.new do |opts|
-    opts.on("--requeue", "Requeue interrupted jobs back to queued (not yet implemented)") { options[:requeue] = true }
+    opts.on("--requeue", "Requeue interrupted jobs back to queued") { options[:requeue] = true }
   end.parse!(ARGV)
 
   ActiveRecord::Base.establish_connection(database_url)
