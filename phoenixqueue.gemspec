@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activerecord", "~> 6.1"
+  spec.add_dependency "activejob", "~> 6.1"
   spec.add_dependency "pg"
   spec.add_dependency "railties", "~> 6.1"
 

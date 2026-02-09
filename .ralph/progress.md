@@ -50,3 +50,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 2 criterion 10 complete in `RALPH_TASK.md`.
 - Worker now transitions claimed jobs to `running` with lock + lease fields (and the test suite cleans DB state between examples).
 - Marked Phase 2 criterion 11 complete in `RALPH_TASK.md`.
+- Worker can now execute job payloads via `ActiveJob::Base.execute(payload)` with specs.
+- Marked Phase 2 criterion 12 complete in `RALPH_TASK.md`.

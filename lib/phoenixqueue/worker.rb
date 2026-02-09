@@ -1,5 +1,7 @@
 module Phoenixqueue
   class Worker
+    require "active_job"
+
     def self.claim_relation(queues:)
       Phoenixqueue::Job
         .where(status: "queued", queue: queues)
@@ -23,6 +25,10 @@ module Phoenixqueue
 
         job
       end
+    end
+
+    def self.execute_job(job_record)
+      ActiveJob::Base.execute(job_record.payload)
     end
   end
 end
