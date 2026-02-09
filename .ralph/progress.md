@@ -109,3 +109,4 @@ This is how Ralph maintains continuity across iterations.
 - Mounted the engine in the dummy Rails app and added a request spec asserting `GET /phoenixqueue` returns 200.
 - Added `README.md` documenting how to mount the engine in a host Rails app.
 - Marked Phase 6 criterion 27 complete in `RALPH_TASK.md`.
+- Expanded the dashboard request spec to verify counts-by-status and queue latency rendering; marked Phase 6 criterion 28 complete.
