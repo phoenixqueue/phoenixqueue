@@ -107,5 +107,45 @@ RSpec.describe "Phoenixqueue Web UI" do
     expect(last_response.body).not_to include(queued_alpha.id.to_s)
     expect(last_response.body).not_to include(failed_beta.id.to_s)
   end
+
+  it "renders the job detail and shows payload, error, attempts, timing, and progress" do
+    fixed_now = Time.utc(2026, 2, 9, 12, 0, 0)
+
+    job = Phoenixqueue::Job.create!(
+      queue: "default",
+      job_class: "ExampleJob",
+      payload: { "args" => [{ "user_id" => 123 }], "job_class" => "ExampleJob" },
+      status: "failed",
+      run_at: fixed_now - 10,
+      started_at: fixed_now - 9,
+      finished_at: fixed_now - 1,
+      attempt: 2,
+      max_attempts: 5,
+      last_error_class: "RuntimeError",
+      last_error_message: "something went wrong",
+      last_error_backtrace: "line1\nline2",
+      progress: { "completed" => ["plan"], "current" => "execute" }
+    )
+
+    get "/phoenixqueue/jobs/#{job.id}"
+    expect(last_response.status).to eq(200)
+
+    body = last_response.body
+    expect(body).to include(job.id.to_s)
+    expect(body).to include("ExampleJob")
+    expect(body).to include("2/5")
+    expect(body).to include((fixed_now - 10).utc.iso8601)
+    expect(body).to include((fixed_now - 9).utc.iso8601)
+    expect(body).to include((fixed_now - 1).utc.iso8601)
+
+    expect(body).to include("RuntimeError")
+    expect(body).to include("something went wrong")
+    expect(body).to include("Backtrace")
+
+    expect(body).to include("&quot;user_id&quot;: 123")
+
+    expect(body).to include("plan")
+    expect(body).to include("execute")
+  end
 end
 
