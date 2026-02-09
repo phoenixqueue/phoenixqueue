@@ -26,6 +26,7 @@ RSpec.describe Phoenixqueue::Sweeper do
     expect(stale.status).to eq("interrupted")
     expect(stale.locked_by).to be_nil
     expect(stale.lease_expires_at).to be_nil
+    expect(Phoenixqueue::JobEvent.where(job_id: stale.id, event_type: "interrupted").count).to eq(1)
 
     fresh.reload
     expect(fresh.status).to eq("running")

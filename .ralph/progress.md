@@ -60,3 +60,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 2 criterion 15 complete in `RALPH_TASK.md`.
 - Added `phoenixqueue sweep` + a minimal sweeper to mark stale running jobs as `interrupted`, with specs.
 - Marked Phase 3 criterion 16 complete in `RALPH_TASK.md`.
+- Sweeper now appends `job_event(interrupted)` for interrupted jobs, with specs.
+- Marked Phase 3 criterion 17 complete in `RALPH_TASK.md`.
