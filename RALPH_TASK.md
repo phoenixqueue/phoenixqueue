@@ -242,7 +242,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 6. [x] Rails engine or railtie loads `Phoenixqueue::Job` and `Phoenixqueue::JobEvent`.
 7. [x] Migrations create `phoenixqueue_jobs` and `phoenixqueue_job_events` with required columns and indexes.
 8. [x] `Phoenixqueue::Job` validates required fields (queue, job_class, payload, status, run_at).
-9. [ ] Creating a job record automatically writes `job_event(enqueued)`.
+9. [x] Creating a job record automatically writes `job_event(enqueued)`.
 
 ### Phase 2 — worker core
 10. [ ] Worker implements `claim_next_job(queues:, worker_id:)` using `FOR UPDATE SKIP LOCKED`.

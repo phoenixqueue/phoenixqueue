@@ -44,3 +44,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 1 criterion 7 complete in `RALPH_TASK.md`.
 - Added required-field validations to `Phoenixqueue::Job` with specs.
 - Marked Phase 1 criterion 8 complete in `RALPH_TASK.md`.
+- Added automatic `job_event(enqueued)` creation when a `Phoenixqueue::Job` row is created.
+- Marked Phase 1 criterion 9 complete in `RALPH_TASK.md`.
