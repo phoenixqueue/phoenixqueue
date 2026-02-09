@@ -6,10 +6,10 @@ source_file: RALPH_TASK.md
 source_mtime:   File: "/Users/riccardotacconi/dev/phoenixqueue/RALPH_TASK.md"
     ID: 10000130000001a Namelen: ?       Type: apfs
 Block size: 4096       Fundamental block size: 4096
-Blocks: Total: 120699413  Free: 29308989   Available: 29308989
-Inodes: Total: 1173933611 Free: 1172359560
+Blocks: Total: 120699413  Free: 29295498   Available: 29295498
+Inodes: Total: 1173394107 Free: 1171819920
 0
-generated_at: 2026-02-09T18:21:21Z
+generated_at: 2026-02-09T18:27:45Z
 
 tasks:
   - id: "line_235"
@@ -140,7 +140,7 @@ tasks:
     raw_marker: 18.
   - id: "line_261"
     line_number: 261
-    status: pending
+    status: completed
     parallel_group: 999999
     description: `ActiveJob::QueueAdapters::PhoenixqueueAdapter` exists with `enqueue` and `enqueue_at`.
     indent_level: 0
@@ -154,7 +154,7 @@ tasks:
     raw_marker: 20.
   - id: "line_263"
     line_number: 263
-    status: pending
+    status: completed
     parallel_group: 999999
     description: RSpec: enqueuing via ActiveJob creates a `phoenixqueue_jobs` row with correct queue, job_class, payload, run_at.
     indent_level: 0
