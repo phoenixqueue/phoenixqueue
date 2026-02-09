@@ -75,3 +75,5 @@ This is how Ralph maintains continuity across iterations.
 - Added `ActiveJob::QueueAdapters::PhoenixqueueAdapter` with `enqueue` and `enqueue_at` that persists `phoenixqueue_jobs` rows.
 - Added unit specs covering enqueue + enqueue_at behavior and ensured `job_event(enqueued)` is written.
 - Marked Phase 4 criterion 19 complete in `RALPH_TASK.md`.
+- Added an integration spec proving `config.active_job.queue_adapter = :phoenixqueue` enqueues into `phoenixqueue_jobs` with correct fields.
+- Marked Phase 4 criterion 21 complete in `RALPH_TASK.md`.
