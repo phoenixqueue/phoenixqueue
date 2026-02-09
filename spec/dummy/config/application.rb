@@ -1,4 +1,5 @@
 require "logger"
+require "rails"
 require "rails/application"
 require "active_job/railtie"
 

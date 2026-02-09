@@ -259,7 +259,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 
 ### Phase 4 — ActiveJob adapter
 19. [x] `ActiveJob::QueueAdapters::PhoenixqueueAdapter` exists with `enqueue` and `enqueue_at`.
-20. [ ] Dummy Rails app in `spec/dummy` can set `config.active_job.queue_adapter = :phoenixqueue` and enqueue a job.
+20. [x] Dummy Rails app in `spec/dummy` can set `config.active_job.queue_adapter = :phoenixqueue` and enqueue a job.
 21. [x] RSpec: enqueuing via ActiveJob creates a `phoenixqueue_jobs` row with correct queue, job_class, payload, run_at.
 
 ### Phase 5 — checkpoint/resume DSL

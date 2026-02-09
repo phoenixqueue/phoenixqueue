@@ -83,3 +83,7 @@ This is how Ralph maintains continuity across iterations.
 
 ### 2026-02-09 18:27:49
 **Session 4 started** (model: gpt-5.2-high)
+
+### 2026-02-09
+- Verified the dummy Rails app (`spec/dummy`) configures `config.active_job.queue_adapter = :phoenixqueue` in test env and can enqueue an `ActiveJob` into `phoenixqueue_jobs` (covered by `spec/dummy_app_spec.rb`).
+- Marked Phase 4 criterion 20 complete in `RALPH_TASK.md`.
