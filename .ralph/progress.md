@@ -70,3 +70,8 @@ This is how Ralph maintains continuity across iterations.
 
 ### 2026-02-09 18:21:25
 **Session 3 started** (model: gpt-5.2-high)
+
+### 2026-02-09
+- Added `ActiveJob::QueueAdapters::PhoenixqueueAdapter` with `enqueue` and `enqueue_at` that persists `phoenixqueue_jobs` rows.
+- Added unit specs covering enqueue + enqueue_at behavior and ensured `job_event(enqueued)` is written.
+- Marked Phase 4 criterion 19 complete in `RALPH_TASK.md`.

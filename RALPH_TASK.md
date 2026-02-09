@@ -258,7 +258,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 18. [x] Optional: `phoenixqueue sweep --requeue` requeues interrupted jobs to `queued` (and writes `job_event(retried)` or `requeued`).
 
 ### Phase 4 — ActiveJob adapter
-19. [ ] `ActiveJob::QueueAdapters::PhoenixqueueAdapter` exists with `enqueue` and `enqueue_at`.
+19. [x] `ActiveJob::QueueAdapters::PhoenixqueueAdapter` exists with `enqueue` and `enqueue_at`.
 20. [ ] Dummy Rails app in `spec/dummy` can set `config.active_job.queue_adapter = :phoenixqueue` and enqueue a job.
 21. [ ] RSpec: enqueuing via ActiveJob creates a `phoenixqueue_jobs` row with correct queue, job_class, payload, run_at.
 
