@@ -1,6 +1,6 @@
 ---
 task: "Build phoenixqueue: a Postgres-backed ActiveJob adapter + worker + checkpoint/resume + modern Web UI (Rails engine)"
-test_command: "test -f RALPH_TASK.md && grep -n '^- \\[ \\] ' RALPH_TASK.md | head -n 30"
+test_command: "test -f RALPH_TASK.md && grep -nE '^[0-9]+\\. \\[ \\] ' RALPH_TASK.md | head -n 30"
 max_iterations: 20
 ---
 
