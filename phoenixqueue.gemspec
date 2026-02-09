@@ -20,6 +20,10 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "activerecord", "~> 6.1"
+  spec.add_dependency "pg"
+  spec.add_dependency "railties", "~> 6.1"
+
   spec.add_development_dependency "rspec"
 
   spec.metadata = {

@@ -38,3 +38,5 @@ This is how Ralph maintains continuity across iterations.
 - Added `bin/test` to run setup + the full RSpec suite (and run dummy Rails `db:prepare` when present).
 - Marked Phase 0 criterion 4 complete in `RALPH_TASK.md`.
 - Marked Phase 0 criterion 5 complete in `RALPH_TASK.md`.
+- Added Docker-based Ruby dev/test runner (so `pg` can build without host libpq) and a minimal Railtie + models.
+- Marked Phase 1 criterion 6 complete in `RALPH_TASK.md`.

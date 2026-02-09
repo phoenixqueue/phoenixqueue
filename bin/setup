@@ -13,10 +13,6 @@ die() {
   exit 1
 }
 
-log "Installing Ruby gems"
-command -v bundle >/dev/null 2>&1 || die "Bundler is not installed (expected `bundle` on PATH)."
-bundle check >/dev/null 2>&1 || bundle install
-
 log "Starting Postgres via docker compose"
 command -v docker >/dev/null 2>&1 || die "Docker is not installed (expected `docker` on PATH)."
 
@@ -35,7 +31,7 @@ fi
 
 docker info >/dev/null 2>&1 || die "Docker daemon is not running."
 
-docker compose up -d
+docker compose up -d postgres
 
 log "Waiting for Postgres to become ready"
 for _ in $(seq 1 60); do
@@ -57,5 +53,11 @@ docker compose exec -T postgres sh -lc '
     createdb -U "$POSTGRES_USER" "$db"
   fi
 '
+
+log "Building Ruby dev image"
+docker compose build ruby
+
+log "Installing Ruby gems (inside Docker)"
+docker compose run --rm ruby bash -lc "bundle check >/dev/null 2>&1 || bundle install"
 
 log "Setup complete"

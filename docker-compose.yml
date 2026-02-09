@@ -16,6 +16,19 @@ services:
       timeout: 5s
       retries: 30
 
+  ruby:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      BUNDLE_PATH: /app/vendor/bundle
+      PHOENIXQUEUE_DATABASE_URL: postgres://phoenixqueue:phoenixqueue@postgres:5432/phoenixqueue_development
+      PHOENIXQUEUE_TEST_DATABASE_URL: postgres://phoenixqueue:phoenixqueue@postgres:5432/phoenixqueue_test
+    depends_on:
+      postgres:
+        condition: service_healthy
+
 volumes:
   phoenixqueue_pgdata:
 

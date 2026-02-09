@@ -239,7 +239,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 5. [x] `./bin/test` exists and runs the full suite (db up + migrations + tests) and exits 0.
 
 ### Phase 1 — persistence & models
-6. [ ] Rails engine or railtie loads `Phoenixqueue::Job` and `Phoenixqueue::JobEvent`.
+6. [x] Rails engine or railtie loads `Phoenixqueue::Job` and `Phoenixqueue::JobEvent`.
 7. [ ] Migrations create `phoenixqueue_jobs` and `phoenixqueue_job_events` with required columns and indexes.
 8. [ ] `Phoenixqueue::Job` validates required fields (queue, job_class, payload, status, run_at).
 9. [ ] Creating a job record automatically writes `job_event(enqueued)`.

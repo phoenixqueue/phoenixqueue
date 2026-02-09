@@ -13,12 +13,9 @@ log "Preparing environment"
 
 if [[ -x "spec/dummy/bin/rails" ]]; then
   log "Running Rails database preparation (spec/dummy)"
-  (
-    cd "spec/dummy"
-    RAILS_ENV=test bundle exec rails db:prepare
-  )
+  docker compose run --rm ruby bash -lc "cd spec/dummy && RAILS_ENV=test bundle exec rails db:prepare"
 fi
 
 log "Running test suite"
-bundle exec rspec "$@"
+docker compose run --rm ruby bundle exec rspec "$@"
 
