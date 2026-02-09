@@ -54,3 +54,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 2 criterion 12 complete in `RALPH_TASK.md`.
 - Worker now acks success by marking jobs `succeeded` (with `finished_at`) and writing `job_event(succeeded)`.
 - Marked Phase 2 criterion 13 complete in `RALPH_TASK.md`.
+- Worker now records errors and requeues with backoff (or marks failed) with `retried`/`failed` job events.
+- Marked Phase 2 criterion 14 complete in `RALPH_TASK.md`.

@@ -48,6 +48,55 @@ module Phoenixqueue
     def self.perform_job(job_record)
       execute_job(job_record)
       ack_success(job_record)
+      :succeeded
+    rescue StandardError => e
+      handle_failure(job_record, e)
+    end
+
+    def self.backoff_seconds(attempt)
+      [2**(attempt - 1), 300].min
+    end
+
+    def self.handle_failure(job_record, exception)
+      now = Time.now.utc
+      attempt = job_record.attempt.to_i + 1
+
+      error_attrs = {
+        attempt: attempt,
+        last_error_class: exception.class.name,
+        last_error_message: exception.message,
+        last_error_backtrace: Array(exception.backtrace).join("\n"),
+        locked_by: nil,
+        locked_at: nil,
+        lease_expires_at: nil
+      }
+
+      if attempt < job_record.max_attempts.to_i
+        run_at = now + backoff_seconds(attempt)
+        Phoenixqueue::Job.transaction do
+          job_record.update!(
+            **error_attrs,
+            status: "queued",
+            run_at: run_at
+          )
+          Phoenixqueue::JobEvent.create!(
+            job_id: job_record.id,
+            event_type: "retried",
+            data: { "attempt" => attempt, "run_at" => run_at.iso8601 }
+          )
+        end
+        :retried
+      else
+        Phoenixqueue::Job.transaction do
+          job_record.update!(
+            **error_attrs,
+            status: "failed",
+            finished_at: now
+          )
+          Phoenixqueue::JobEvent.create!(job_id: job_record.id, event_type: "failed", data: { "attempt" => attempt })
+        end
+        :failed
+      end
     end
   end
 end
