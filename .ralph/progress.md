@@ -42,3 +42,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 1 criterion 6 complete in `RALPH_TASK.md`.
 - Added ActiveRecord migrations + specs for `phoenixqueue_jobs` and `phoenixqueue_job_events`.
 - Marked Phase 1 criterion 7 complete in `RALPH_TASK.md`.
+- Added required-field validations to `Phoenixqueue::Job` with specs.
+- Marked Phase 1 criterion 8 complete in `RALPH_TASK.md`.
