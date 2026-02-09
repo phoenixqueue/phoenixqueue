@@ -45,8 +45,10 @@ module Phoenixqueue
       end
     end
 
-    def self.perform_job(job_record)
-      execute_job(job_record)
+    def self.perform_job(job_record, heartbeat_interval: 5, lease_duration: 60)
+      with_heartbeat(job_record, interval: heartbeat_interval, lease_duration: lease_duration) do
+        execute_job(job_record)
+      end
       ack_success(job_record)
       :succeeded
     rescue StandardError => e
@@ -97,6 +99,30 @@ module Phoenixqueue
         end
         :failed
       end
+    end
+
+    def self.with_heartbeat(job_record, interval:, lease_duration:)
+      stop = false
+
+      thread = Thread.new do
+        ActiveRecord::Base.connection_pool.with_connection do
+          until stop
+            sleep interval
+            extend_lease(job_record, lease_duration: lease_duration) unless stop
+          end
+        end
+      end
+
+      yield
+    ensure
+      stop = true
+      thread&.join(2)
+    end
+
+    def self.extend_lease(job_record, lease_duration:)
+      now = Time.now.utc
+      Phoenixqueue::Job.where(id: job_record.id, status: "running")
+        .update_all(lease_expires_at: now + lease_duration, updated_at: now)
     end
   end
 end

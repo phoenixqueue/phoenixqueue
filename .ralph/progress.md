@@ -56,3 +56,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 2 criterion 13 complete in `RALPH_TASK.md`.
 - Worker now records errors and requeues with backoff (or marks failed) with `retried`/`failed` job events.
 - Marked Phase 2 criterion 14 complete in `RALPH_TASK.md`.
+- Added a background heartbeat to extend `lease_expires_at` while a job is executing, with specs.
+- Marked Phase 2 criterion 15 complete in `RALPH_TASK.md`.
