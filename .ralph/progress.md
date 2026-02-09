@@ -32,3 +32,7 @@ This is how Ralph maintains continuity across iterations.
 
 ### 2026-02-09 17:57:48
 **Session 2 started** (model: gpt-5.2-high)
+
+### 2026-02-09
+- Added `bin/setup` to install gems and bring up Postgres via Docker Compose (waits for readiness + creates a test DB).
+- Marked Phase 0 criterion 4 complete in `RALPH_TASK.md`.

@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+log() {
+  printf "\n==> %s\n" "$1"
+}
+
+die() {
+  echo "ERROR: $1" >&2
+  exit 1
+}
+
+log "Installing Ruby gems"
+command -v bundle >/dev/null 2>&1 || die "Bundler is not installed (expected `bundle` on PATH)."
+bundle check >/dev/null 2>&1 || bundle install
+
+log "Starting Postgres via docker compose"
+command -v docker >/dev/null 2>&1 || die "Docker is not installed (expected `docker` on PATH)."
+
+if ! docker info >/dev/null 2>&1; then
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    # Best-effort: start Docker Desktop if it's installed.
+    open -a Docker >/dev/null 2>&1 || true
+  fi
+
+  echo "Waiting for Docker daemon..."
+  for _ in $(seq 1 60); do
+    docker info >/dev/null 2>&1 && break
+    sleep 2
+  done
+fi
+
+docker info >/dev/null 2>&1 || die "Docker daemon is not running."
+
+docker compose up -d
+
+log "Waiting for Postgres to become ready"
+for _ in $(seq 1 60); do
+  if docker compose exec -T postgres pg_isready -U phoenixqueue -d phoenixqueue_development >/dev/null 2>&1; then
+    break
+  fi
+  sleep 1
+done
+
+docker compose exec -T postgres pg_isready -U phoenixqueue -d phoenixqueue_development >/dev/null 2>&1 \
+  || die "Postgres did not become ready in time."
+
+log "Ensuring a test database exists"
+docker compose exec -T postgres sh -lc '
+  set -e
+  db="phoenixqueue_test"
+  exists="$(psql -U "$POSTGRES_USER" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='\''${db}'\''" | tr -d "[:space:]")"
+  if [ "$exists" != "1" ]; then
+    createdb -U "$POSTGRES_USER" "$db"
+  fi
+'
+
+log "Setup complete"

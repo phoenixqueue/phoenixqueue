@@ -235,7 +235,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 1. [x] Repo root is a Ruby gem named `phoenixqueue` with `phoenixqueue.gemspec`, `Gemfile`, and `lib/phoenixqueue.rb`.
 2. [x] RSpec is configured and `bundle exec rspec` runs (even if only a placeholder spec).
 3. [x] `docker-compose.yml` exists and can start Postgres (`docker compose up -d`).
-4. [ ] `./bin/setup` exists and completes successfully with Docker installed.
+4. [x] `./bin/setup` exists and completes successfully with Docker installed.
 5. [ ] `./bin/test` exists and runs the full suite (db up + migrations + tests) and exits 0.
 
 ### Phase 1 — persistence & models
