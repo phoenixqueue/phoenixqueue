@@ -183,5 +183,40 @@ RSpec.describe "Phoenixqueue Web UI" do
     expect(retried.event_type).to eq("retried")
     expect(retried.data).to include("attempt" => 2, "reason" => "retry")
   end
+
+  it "resumes a job via POST /phoenixqueue/jobs/:id/resume and preserves checkpoint progress" do
+    fixed_now = Time.utc(2026, 2, 9, 12, 0, 0)
+    allow(Time).to receive(:now).and_return(fixed_now)
+
+    original_progress = { "completed" => ["a"], "current" => "b" }
+    job = Phoenixqueue::Job.create!(
+      queue: "default",
+      job_class: "ResumeMeJob",
+      payload: { "args" => [1] },
+      status: "failed",
+      run_at: fixed_now - 60,
+      finished_at: fixed_now - 30,
+      attempt: 1,
+      max_attempts: 5,
+      last_error_class: "RuntimeError",
+      last_error_message: "boom",
+      progress: original_progress
+    )
+
+    post "/phoenixqueue/jobs/#{job.id}/resume"
+    expect(last_response.status).to eq(302)
+    follow_redirect!
+    expect(last_response.status).to eq(200)
+
+    job.reload
+    expect(job.status).to eq("queued")
+    expect(job.run_at).to eq(fixed_now)
+    expect(job.attempt).to eq(2)
+    expect(job.progress).to eq(original_progress)
+
+    retried = job.events.order(:id).last
+    expect(retried.event_type).to eq("retried")
+    expect(retried.data).to include("attempt" => 2, "reason" => "resume")
+  end
 end
 
