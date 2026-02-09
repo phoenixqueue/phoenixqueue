@@ -7,6 +7,10 @@ RSpec.configure do |config|
     Phoenixqueue::TestDatabase.migrate!
   end
 
+  config.before(:each) do
+    Phoenixqueue::TestDatabase.clean!
+  end
+
   config.disable_monkey_patching!
   config.expect_with :rspec do |c|
     c.syntax = :expect

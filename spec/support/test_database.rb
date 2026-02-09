@@ -17,6 +17,14 @@ module Phoenixqueue
       ActiveRecord::Migration.verbose = false
       ActiveRecord::MigrationContext.new(migrations_path, ActiveRecord::SchemaMigration).migrate
     end
+
+    def self.clean!
+      conn = ActiveRecord::Base.connection
+      return unless conn.data_source_exists?("phoenixqueue_jobs") && conn.data_source_exists?("phoenixqueue_job_events")
+
+      Phoenixqueue::JobEvent.delete_all
+      Phoenixqueue::Job.delete_all
+    end
   end
 end
 

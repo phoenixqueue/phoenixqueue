@@ -48,3 +48,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 1 criterion 9 complete in `RALPH_TASK.md`.
 - Implemented worker `claim_next_job` using `FOR UPDATE SKIP LOCKED` with specs.
 - Marked Phase 2 criterion 10 complete in `RALPH_TASK.md`.
+- Worker now transitions claimed jobs to `running` with lock + lease fields (and the test suite cleans DB state between examples).
+- Marked Phase 2 criterion 11 complete in `RALPH_TASK.md`.

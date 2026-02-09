@@ -8,10 +8,20 @@ module Phoenixqueue
         .lock("FOR UPDATE SKIP LOCKED")
     end
 
-    def self.claim_next_job(queues:, worker_id:)
-      # `worker_id` is used in later criteria when we transition the job to `running`.
+    def self.claim_next_job(queues:, worker_id:, lease_duration: 60)
+      now = Time.now.utc
       Phoenixqueue::Job.transaction do
-        claim_relation(queues: queues).first
+        job = claim_relation(queues: queues).first
+        return nil unless job
+
+        job.update!(
+          status: "running",
+          locked_by: worker_id,
+          locked_at: now,
+          lease_expires_at: now + lease_duration
+        )
+
+        job
       end
     end
   end
