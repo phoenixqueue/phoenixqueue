@@ -52,3 +52,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 2 criterion 11 complete in `RALPH_TASK.md`.
 - Worker can now execute job payloads via `ActiveJob::Base.execute(payload)` with specs.
 - Marked Phase 2 criterion 12 complete in `RALPH_TASK.md`.
+- Worker now acks success by marking jobs `succeeded` (with `finished_at`) and writing `job_event(succeeded)`.
+- Marked Phase 2 criterion 13 complete in `RALPH_TASK.md`.

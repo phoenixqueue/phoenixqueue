@@ -248,7 +248,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 10. [x] Worker implements `claim_next_job(queues:, worker_id:)` using `FOR UPDATE SKIP LOCKED`.
 11. [x] Worker updates job to `running` with `locked_by`, `locked_at`, `lease_expires_at`.
 12. [x] Worker executes a claimed job via `ActiveJob::Base.execute(payload)`.
-13. [ ] On success: job becomes `succeeded` with `finished_at` and `job_event(succeeded)`.
+13. [x] On success: job becomes `succeeded` with `finished_at` and `job_event(succeeded)`.
 14. [ ] On exception: record error; retry (re-queue with backoff) or set `failed` when `max_attempts` exceeded.
 15. [ ] Heartbeat updates `lease_expires_at` while job is running (configurable interval + lease duration).
 
