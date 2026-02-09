@@ -28,7 +28,10 @@ module Phoenixqueue
     end
 
     def self.execute_job(job_record)
+      Phoenixqueue::Current.set_from_record(job_record)
       ActiveJob::Base.execute(job_record.payload)
+    ensure
+      Phoenixqueue::Current.clear!
     end
 
     def self.ack_success(job_record)

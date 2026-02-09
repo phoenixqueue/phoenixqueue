@@ -264,7 +264,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 
 ### Phase 5 — checkpoint/resume DSL
 22. [ ] Module `Phoenixqueue::Checkpointed` provides `step(:name) { ... }`.
-23. [ ] Worker sets `Phoenixqueue::Current.job_id` (thread-local) during execution and clears it in `ensure`.
+23. [x] Worker sets `Phoenixqueue::Current.job_id` (thread-local) during execution and clears it in `ensure`.
 24. [ ] Completed steps are persisted in `jobs.progress` jsonb.
 25. [ ] On retry/resume, completed steps are skipped (verified by specs).
 26. [ ] If a job fails mid-step, that step is not marked complete and re-runs on retry (verified by specs).
