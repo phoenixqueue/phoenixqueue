@@ -245,7 +245,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 9. [x] Creating a job record automatically writes `job_event(enqueued)`.
 
 ### Phase 2 — worker core
-10. [ ] Worker implements `claim_next_job(queues:, worker_id:)` using `FOR UPDATE SKIP LOCKED`.
+10. [x] Worker implements `claim_next_job(queues:, worker_id:)` using `FOR UPDATE SKIP LOCKED`.
 11. [ ] Worker updates job to `running` with `locked_by`, `locked_at`, `lease_expires_at`.
 12. [ ] Worker executes a claimed job via `ActiveJob::Base.execute(payload)`.
 13. [ ] On success: job becomes `succeeded` with `finished_at` and `job_event(succeeded)`.
