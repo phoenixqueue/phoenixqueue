@@ -9,6 +9,7 @@ require_relative "phoenixqueue/sweeper"
 
 begin
   require_relative "phoenixqueue/railtie"
+  require_relative "phoenixqueue/web"
 rescue LoadError
   # Rails is optional during early iterations / non-Rails usage.
 end

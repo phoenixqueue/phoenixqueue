@@ -1,0 +1,49 @@
+<h1 style="margin:0 0 14px;">Jobs</h1>
+
+<form method="get" action="<%= jobs_path %>" style="margin:0 0 14px;">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:end;">
+    <label>
+      <div class="muted" style="font-size:12px;margin-bottom:4px;">Status</div>
+      <input name="status" value="<%= @status %>" placeholder="queued" />
+    </label>
+    <label>
+      <div class="muted" style="font-size:12px;margin-bottom:4px;">Queue</div>
+      <input name="queue" value="<%= @queue %>" placeholder="default" />
+    </label>
+    <label>
+      <div class="muted" style="font-size:12px;margin-bottom:4px;">Job class</div>
+      <input name="job_class" value="<%= @job_class %>" placeholder="MyJob" />
+    </label>
+    <button type="submit">Filter</button>
+    <a class="muted" href="<%= jobs_path %>">Clear</a>
+  </div>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Queue</th>
+      <th>Job class</th>
+      <th>Run at</th>
+      <th>Attempt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td><a href="<%= job_path(job.id) %>"><code><%= job.id %></code></a></td>
+        <td><span class="pill"><%= job.status %></span></td>
+        <td><code><%= job.queue %></code></td>
+        <td><code><%= job.job_class %></code></td>
+        <td class="muted"><%= job.run_at&.utc&.iso8601 %></td>
+        <td class="muted"><%= job.attempt %>/<%= job.max_attempts %></td>
+      </tr>
+    <% end %>
+    <% if @jobs.empty? %>
+      <tr><td colspan="6" class="muted">No jobs found.</td></tr>
+    <% end %>
+  </tbody>
+</table>
+

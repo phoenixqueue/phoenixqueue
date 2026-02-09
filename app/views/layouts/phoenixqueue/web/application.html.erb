@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Phoenixqueue</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; }
+      header { padding: 16px 20px; border-bottom: 1px solid rgba(127,127,127,.25); }
+      header a { text-decoration: none; color: inherit; }
+      nav a { margin-right: 12px; }
+      main { padding: 20px; max-width: 1100px; margin: 0 auto; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid rgba(127,127,127,.25); vertical-align: top; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      .muted { opacity: .75; }
+      .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); font-size: 12px; }
+      .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .card { border: 1px solid rgba(127,127,127,.25); border-radius: 12px; padding: 14px; }
+      .card h2 { margin: 0 0 10px; font-size: 14px; letter-spacing: .02em; text-transform: uppercase; opacity: .85; }
+    </style>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+  </head>
+  <body>
+    <header>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <div>
+          <a href="<%= main_app.respond_to?(:root_path) ? main_app.root_path : "/" %>"><strong>Phoenixqueue</strong></a>
+          <span class="muted">Web</span>
+        </div>
+        <nav>
+          <a href="<%= root_path %>">Dashboard</a>
+          <a href="<%= jobs_path %>">Jobs</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+  </body>
+</html>
+

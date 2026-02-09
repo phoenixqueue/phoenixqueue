@@ -270,7 +270,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 26. [x] If a job fails mid-step, that step is not marked complete and re-runs on retry (verified by specs).
 
 ### Phase 6 — Web UI (Rails engine)
-27. [ ] Rails engine `Phoenixqueue::Web` is mountable (document route mount in README).
+27. [x] Rails engine `Phoenixqueue::Web` is mountable (document route mount in README).
 28. [ ] `GET /phoenixqueue` dashboard returns 200 and shows counts by status + queue latency.
 29. [ ] `GET /phoenixqueue/jobs` returns 200 and supports filtering by status, queue, job_class.
 30. [ ] `GET /phoenixqueue/jobs/:id` returns 200 and shows payload, error, attempts, timing, progress steps.

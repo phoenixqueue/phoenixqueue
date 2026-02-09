@@ -1,0 +1,90 @@
+<h1 style="margin:0 0 14px;">Job <code><%= @job.id %></code></h1>
+
+<div class="grid">
+  <div class="card">
+    <h2>Summary</h2>
+    <table>
+      <tbody>
+        <tr><th>Status</th><td><span class="pill"><%= @job.status %></span></td></tr>
+        <tr><th>Queue</th><td><code><%= @job.queue %></code></td></tr>
+        <tr><th>Job class</th><td><code><%= @job.job_class %></code></td></tr>
+        <tr><th>Run at</th><td class="muted"><%= @job.run_at&.utc&.iso8601 %></td></tr>
+        <tr><th>Started</th><td class="muted"><%= @job.started_at&.utc&.iso8601 %></td></tr>
+        <tr><th>Finished</th><td class="muted"><%= @job.finished_at&.utc&.iso8601 %></td></tr>
+        <tr><th>Attempts</th><td class="muted"><%= @job.attempt %>/<%= @job.max_attempts %></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Progress</h2>
+    <% progress = (@job.progress || {}) %>
+    <div class="muted" style="font-size:12px;">Completed steps</div>
+    <div style="margin:6px 0 10px;">
+      <% Array(progress["completed"]).each do |name| %>
+        <span class="pill"><%= name %></span>
+      <% end %>
+      <% if Array(progress["completed"]).empty? %>
+        <span class="muted">None</span>
+      <% end %>
+    </div>
+    <div class="muted" style="font-size:12px;">Current step</div>
+    <div style="margin-top:6px;">
+      <% if progress["current"].present? %>
+        <span class="pill"><%= progress["current"] %></span>
+      <% else %>
+        <span class="muted">None</span>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h2>Error</h2>
+  <% if @job.last_error_class.present? || @job.last_error_message.present? %>
+    <div><strong><%= @job.last_error_class %></strong></div>
+    <pre style="white-space:pre-wrap;"><%= @job.last_error_message %></pre>
+    <% if @job.last_error_backtrace.present? %>
+      <details>
+        <summary class="muted">Backtrace</summary>
+        <pre style="white-space:pre-wrap;"><%= @job.last_error_backtrace %></pre>
+      </details>
+    <% end %>
+  <% else %>
+    <div class="muted">No error recorded.</div>
+  <% end %>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h2>Payload</h2>
+  <details>
+    <summary class="muted">Show payload (JSON)</summary>
+    <pre style="white-space:pre-wrap;"><%= JSON.pretty_generate(@job.payload || {}) %></pre>
+  </details>
+</div>
+
+<div class="card" style="margin-top:16px;">
+  <h2>Timeline</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Event</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td class="muted"><%= event.created_at&.utc&.iso8601 %></td>
+          <td><span class="pill"><%= event.event_type %></span></td>
+          <td class="muted"><code><%= event.data.to_json %></code></td>
+        </tr>
+      <% end %>
+      <% if @events.empty? %>
+        <tr><td colspan="3" class="muted">No events.</td></tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

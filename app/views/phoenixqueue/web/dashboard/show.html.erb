@@ -1,0 +1,50 @@
+<h1 style="margin:0 0 14px;">Dashboard</h1>
+
+<div class="grid">
+  <div class="card">
+    <h2>Counts by status</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @counts_by_status.sort_by { |(status, _)| status.to_s }.each do |status, count| %>
+          <tr>
+            <td><span class="pill"><%= status %></span></td>
+            <td><%= count %></td>
+          </tr>
+        <% end %>
+        <% if @counts_by_status.empty? %>
+          <tr><td colspan="2" class="muted">No jobs yet.</td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Queue latency (oldest queued)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Queue</th>
+          <th>Age (seconds)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @queue_latency_by_queue_seconds.sort_by { |(q, _)| q.to_s }.each do |queue, seconds| %>
+          <tr>
+            <td><code><%= queue %></code></td>
+            <td><%= seconds %></td>
+          </tr>
+        <% end %>
+        <% if @queue_latency_by_queue_seconds.empty? %>
+          <tr><td colspan="2" class="muted">No queued jobs.</td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
