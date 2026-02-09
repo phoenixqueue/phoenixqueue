@@ -40,3 +40,5 @@ This is how Ralph maintains continuity across iterations.
 - Marked Phase 0 criterion 5 complete in `RALPH_TASK.md`.
 - Added Docker-based Ruby dev/test runner (so `pg` can build without host libpq) and a minimal Railtie + models.
 - Marked Phase 1 criterion 6 complete in `RALPH_TASK.md`.
+- Added ActiveRecord migrations + specs for `phoenixqueue_jobs` and `phoenixqueue_job_events`.
+- Marked Phase 1 criterion 7 complete in `RALPH_TASK.md`.
