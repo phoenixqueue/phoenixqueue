@@ -218,5 +218,33 @@ RSpec.describe "Phoenixqueue Web UI" do
     expect(retried.event_type).to eq("retried")
     expect(retried.data).to include("attempt" => 2, "reason" => "resume")
   end
+
+  it "cancels a job via POST /phoenixqueue/jobs/:id/cancel and prevents further execution" do
+    fixed_now = Time.utc(2026, 2, 9, 12, 0, 0)
+    allow(Time).to receive(:now).and_return(fixed_now)
+
+    job = Phoenixqueue::Job.create!(
+      queue: "default",
+      job_class: "CancelMeJob",
+      payload: { "args" => [1] },
+      status: "queued",
+      run_at: fixed_now - 5
+    )
+
+    post "/phoenixqueue/jobs/#{job.id}/cancel"
+    expect(last_response.status).to eq(302)
+    follow_redirect!
+    expect(last_response.status).to eq(200)
+
+    job.reload
+    expect(job.status).to eq("canceled")
+    expect(job.finished_at).to eq(fixed_now)
+
+    canceled = job.events.order(:id).last
+    expect(canceled.event_type).to eq("canceled")
+
+    claimed = Phoenixqueue::Worker.claim_next_job(queues: ["default"], worker_id: "worker-1")
+    expect(claimed).to be_nil
+  end
 end
 

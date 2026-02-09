@@ -276,7 +276,7 @@ Build a Rails Engine `Phoenixqueue::Web` mountable in the host app.
 30. [x] `GET /phoenixqueue/jobs/:id` returns 200 and shows payload, error, attempts, timing, progress steps.
 31. [x] `POST /phoenixqueue/jobs/:id/retry` works (job back to queued, attempt incremented as appropriate).
 32. [x] `POST /phoenixqueue/jobs/:id/resume` works and preserves checkpoint progress (skips completed steps).
-33. [ ] `POST /phoenixqueue/jobs/:id/cancel` marks job `canceled` and prevents further execution.
+33. [x] `POST /phoenixqueue/jobs/:id/cancel` marks job `canceled` and prevents further execution.
 
 ### Phase 7 — UX/security polish
 34. [ ] Payload redaction via `Phoenixqueue.config.redact_keys`; UI displays redacted payload fields.
